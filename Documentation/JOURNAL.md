@@ -48,3 +48,21 @@ We learned that Spring Web handles the web layer, but we explicitly need Spring 
 "To map a Java class to a database table in Spring Boot, I utilize Spring Data JPA. By annotating a standard Java POJO with `@Entity` and defining a primary key with `@Id`, the underlying ORM (Hibernate) automatically maps the object to a relational database table, abstracting away the need for boilerplate JDBC code and manual SQL queries."
 
 ---
+
+## Day 3: Database Connection & Repository Layer
+**Date:** 23-02-2026
+
+### What we built
+Added the H2 Database dependency to the `pom.xml` and configured the database connection and Hibernate settings in the `application.properties` file. Created a `SchemeRepository` interface in the `repository` package that extends Spring Data's `JpaRepository`.
+
+### Why we built it
+Instead of installing a heavyweight relational database like PostgreSQL—which requires significant local setup—we opted for H2, an in-memory database that runs entirely in RAM. This is ideal for rapid prototyping. We extended `JpaRepository` so that Spring Data JPA handles all standard CRUD operations on the `Scheme` entity automatically, completely eliminating the need to write raw JDBC code or manual SQL queries.
+
+### What went wrong & How we fixed it
+Implementation went smoothly with no compilation errors. The application successfully connected to the embedded database, and Hibernate generated the schema automatically upon startup.
+
+### Key Learning
+The `application.properties` file acts as the centralized configuration hub for Spring Boot and its dependencies. Additionally, utilizing an in-memory database like H2 provides a frictionless way to test data layers during early development without worrying about complex data manipulation or persistent storage setups.
+
+### Interview Explanation Angle
+"To avoid writing boilerplate JDBC code for standard database operations, I leverage Spring Data JPA. By creating a repository interface that extends `JpaRepository` and passing in the domain entity, Spring Boot dynamically generates the necessary SQL implementations at runtime. This allows me to execute CRUD operations cleanly and focus strictly on the core business logic."
